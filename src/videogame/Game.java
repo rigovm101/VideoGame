@@ -89,7 +89,7 @@ public class Game implements Runnable {
             int iPosY = (int) (Math.random() * (341) + 40);
             int d = (int) (Math.random() * (2) + 1);
             int s = (int) (Math.random() * (5) + 2);
-            bads.add(new Bad(iPosX, iPosY, 200, 100, this));
+            bads.add(new Bad(iPosX, iPosY, 20, 10, this));
         }
         display.getJframe().addKeyListener(keyManager);
        /* display.getJframe().addMouseListener(mouseManager);
@@ -138,35 +138,7 @@ public class Game implements Runnable {
     }
 
     private void tick() {
-        //Solo se hará tick si hay vidas
-        if (player.getVidas() > 0) {
-            keyManager.tick();
-            // avancing player with colision
-            player.tick();
-            //ticking the bad guys
-            for (int i = 0; i < bads.size(); i++) {
-                Bad bad = bads.get(i);
-                bad.tick();
-                //Colision enemigo / jugador
-                if (player.intersecta(bad)) {
-                    int iPosX = (int) (Math.random() * (-199) - 200);
-                    int iPosY = (int) (Math.random() * (341) + 40);
-                    bad.setX(iPosX);
-                    bad.setY(iPosY);
-                    setScore(getScore() + 10);
-                    //Si sube de puntaje y era negativo
-                    if(getScore() >= 0 && !player.isRecovery()){
-                        player.setRecovery(true);
-                    }
-                }
-            }
-            //Resta de vidas si se baja de 0 o positivo
-            if (getScore() < 0 && player.isRecovery()) {
-                player.setVidas(player.getVidas() - 1);
-                player.setRecovery(false);
-            }
-        }
-
+        //Implementar tick
     }
 
     private void render() {
@@ -183,21 +155,7 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
-            g.setColor(Color.white);
-            //Si hay vidas, dibujar al jugador y a enemigos
-            if (player.getVidas() > 0) {
-                player.render(g);
-                for (int i = 0; i < bads.size(); i++) {
-                    Bad bad = bads.get(i);
-                    bad.render(g);
-                }
-            } else {
-                //Dibujar Hasta la Vista
-                
-            }
-            //Dibujar score
-            String text = Integer.toString(getScore());
-            g.drawString(text, 50, 470);
+            //Activar render jugador y malos
             bs.show();
             g.dispose();
 

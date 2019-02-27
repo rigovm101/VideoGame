@@ -4,13 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Assets.java</file>
-            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Player.java</file>
             <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/MouseManager.java</file>
-            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Item.java</file>
             <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Bad.java</file>
-            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/KeyManager.java</file>
-            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/ImageLoader.java</file>
             <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Game.java</file>
+            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Item.java</file>
+            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/KeyManager.java</file>
+            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Player.java</file>
+            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/ImageLoader.java</file>
+            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/Display.java</file>
+            <file>file:/Users/rigobertovaladez/Desktop/VideoGame/src/videogame/VideoGame.java</file>
         </group>
     </open-files>
 </project-private>

@@ -23,17 +23,10 @@ public class Assets {
      */
     public static void init() {
         background = ImageLoader.loadImage("/images/Background.png");
-<<<<<<< HEAD
-        player = ImageLoader.loadImage("/images/mario.png");
         bad = ImageLoader.loadImage("/images/Meth1.png");
         bad2 = ImageLoader.loadImage("/images/Meth2.png");
         bad3 = ImageLoader.loadImage("/images/Meth3.png");
-=======
         player = ImageLoader.loadImage("/images/RV.png");
-        bad = ImageLoader.loadImage("/images/link.png");
-        baby = ImageLoader.loadImage("/images/baby.jpg");
-        heart = ImageLoader.loadImage("/images/heart.png");
->>>>>>> player
     }
     
 }
