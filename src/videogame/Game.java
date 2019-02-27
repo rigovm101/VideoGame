@@ -89,7 +89,7 @@ public class Game implements Runnable {
             int iPosY = (int) (Math.random() * (341) + 40);
             int d = (int) (Math.random() * (2) + 1);
             int s = (int) (Math.random() * (5) + 2);
-            bads.add(new Bad(iPosX, iPosY, d, 80, 80, this, s));
+            bads.add(new Bad(iPosX, iPosY, 200, 100, this));
         }
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
@@ -193,7 +193,7 @@ public class Game implements Runnable {
                 }
             } else {
                 //Dibujar Hasta la Vista
-                g.drawImage(Assets.baby, 180, 80, 400, 400, null);
+                
             }
             //Dibujar score
             String text = Integer.toString(getScore());

@@ -15,8 +15,8 @@ public class Assets {
     public static BufferedImage background; // to store background image
     public static BufferedImage player;     // to store the player image
     public static BufferedImage bad;
-    public static BufferedImage baby;
-    public static BufferedImage heart;
+    public static BufferedImage bad2;
+    public static BufferedImage bad3;
 
     /**
      * initializing the images of the game
@@ -24,9 +24,9 @@ public class Assets {
     public static void init() {
         background = ImageLoader.loadImage("/images/Background.png");
         player = ImageLoader.loadImage("/images/mario.png");
-        bad = ImageLoader.loadImage("/images/link.png");
-        baby = ImageLoader.loadImage("/images/baby.jpg");
-        heart = ImageLoader.loadImage("/images/heart.png");
+        bad = ImageLoader.loadImage("/images/Meth1.png");
+        bad2 = ImageLoader.loadImage("/images/Meth2.png");
+        bad3 = ImageLoader.loadImage("/images/Meth3.png");
     }
     
 }
