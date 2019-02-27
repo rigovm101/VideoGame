@@ -14,31 +14,17 @@ import java.awt.Rectangle;
  */
 public class Bad extends Item{
 
-    private int direction;
     private int width;
     private int height;
     private Game game;
-    private int speed;
+    private int damage;
     
-    public Bad(int x, int y, int direction, int width, int height, Game game, int speed) {
+    public Bad(int x, int y, int width, int height, Game game) {
         super(x, y);
-        this.direction = direction;
         this.width = width;
         this.height = height;
         this.game = game;
-        this.speed = speed;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-    
-    public int getDirection() {
-        return direction;
+        this.damage = 0;
     }
 
     public int getWidth() {
@@ -49,10 +35,6 @@ public class Bad extends Item{
         return height;
     }
 
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
     public void setWidth(int width) {
         this.width = width;
     }
@@ -61,44 +43,17 @@ public class Bad extends Item{
         this.height = height;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     @Override
     public void tick() {
-        //Moving bad to right
-        if(getX() <= -10){
-            setX(getX() + 1);
-        }else{
-            //Up
-            if(getDirection() <= 1){
-                setX(getX() + getSpeed());
-                setY(getY() - getSpeed());
-            }
-            //Down
-            else{
-                setX(getX() + getSpeed());
-                setY(getY() + getSpeed());
-            }
-        }
         
-        // reset x position and y position if colision
-        if(getX() >= 500 || getY() >= 500 || getY() <= 0){
-            int iPosX = (int)(Math.random() * (-199) - 200);
-            int iPosY = (int)(Math.random() * (341) + 40);
-            setX(iPosX);
-            setY(iPosY);
-            game.setScore(game.getScore() - 2);
-        }
-        
-        //Números aleatorios
-        //Metodo 1
-        //(int)*(Math.random() * (b-a+1)+a)
-        //Metodo 2
-        //Rand rnd = new Random();
-        //int azar = rnd.nextInt(b-a)+a;
-        
-//        if (getX() + 60 >= game.getWidth()) {
-//            setX(game.getWidth() - 60);
-//        }
-//        else 
         
     }
     
@@ -108,6 +63,10 @@ public class Bad extends Item{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.bad, getX(), getY(), getWidth(), getHeight(), null);
+        if(damage == 0){
+            g.drawImage(Assets.bad, getX(), getY(), getWidth(), getHeight(), null);
+        }else if(damage == 1){
+            g.drawImage(Assets.bad2, getX(), getY(), getWidth(), getHeight(), null);
+        }
     }
 }

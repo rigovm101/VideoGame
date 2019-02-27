@@ -122,11 +122,5 @@ public class Player extends Item{
     public void render(Graphics g) {
         //Pintado del jugador
         g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
-        //Pintado de vidas
-        int pos = 400;
-        for(int i = 0; i < vidas; i++){
-            g.drawImage(Assets.heart, pos, 460, 50, 50, null);
-            pos = pos + 40;
-        }
     }
 }
