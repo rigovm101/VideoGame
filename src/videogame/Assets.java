@@ -23,7 +23,7 @@ public class Assets {
      */
     public static void init() {
         background = ImageLoader.loadImage("/images/Background.png");
-        player = ImageLoader.loadImage("/images/mario.png");
+        player = ImageLoader.loadImage("/images/RV.png");
         bad = ImageLoader.loadImage("/images/link.png");
         baby = ImageLoader.loadImage("/images/baby.jpg");
         heart = ImageLoader.loadImage("/images/heart.png");

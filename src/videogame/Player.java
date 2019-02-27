@@ -78,35 +78,21 @@ public class Player extends Item{
 
     @Override
     public void tick() {
-        if (game.getKeyManager().u) {
-           setY(getY() - 4);
+        if (game.getKeyManager().left) {
            setX(getX() - 4);
         }
-        if (game.getKeyManager().o) {
-           setY(getY() - 4);
+        if (game.getKeyManager().right) {
            setX(getX() + 4);
         }
-        if (game.getKeyManager().j) {
-           setY(getY() + 4);
-           setX(getX() - 4);
-        }
-        if (game.getKeyManager().l) {
-           setY(getY() + 4);
-           setX(getX() + 4);
-        }
+
         // reset x position and y position if colision
-        if (getX() + 60 >= game.getWidth()) {
-            setX(game.getWidth() - 60);
+        if (getX() + 100 >= game.getWidth()) {
+            setX(game.getWidth() - 100);
         }
-        else if (getX() <= -30) {
-            setX(-30);
+        else if (getX() <= -20) {
+            setX(-20);
         }
-        if (getY() + 80 >= game.getHeight()) {
-            setY(game.getHeight() - 80);
-        }
-        else if (getY() <= -20) {
-            setY(-20);
-        }
+   
     }
     
     public Rectangle getPerimetro(){
@@ -123,10 +109,10 @@ public class Player extends Item{
         //Pintado del jugador
         g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
         //Pintado de vidas
-        int pos = 400;
+        /*int pos = 400;
         for(int i = 0; i < vidas; i++){
             g.drawImage(Assets.heart, pos, 460, 50, 50, null);
             pos = pos + 40;
-        }
+        }*/
     }
 }
