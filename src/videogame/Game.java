@@ -81,7 +81,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        player = new Player(getWidth() - 100, getHeight() - 120, 1, 120, 120, this);
+        player = new Player(getWidth() - 100, getHeight()-88, 1, 120, 120, this);
         int iNum = (int) (Math.random() * 3 + 10);
         //adding elements to bads
         for (int i = 1; i <= iNum; i++) {
@@ -92,10 +92,10 @@ public class Game implements Runnable {
             bads.add(new Bad(iPosX, iPosY, 200, 100, this));
         }
         display.getJframe().addKeyListener(keyManager);
-        display.getJframe().addMouseListener(mouseManager);
+       /* display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
-        display.getCanvas().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);*/
     }
 
     @Override
