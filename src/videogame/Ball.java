@@ -6,6 +6,7 @@
 package videogame;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  *
@@ -51,6 +52,10 @@ public class Ball extends Item {
         this.directionY = directionY;
     }
     
+    public Rectangle getPerimetro(){
+        return new Rectangle(getX(), getY(), getWidth(), getHeight());
+    }
+    
     
     
     
@@ -58,17 +63,17 @@ public class Ball extends Item {
     @Override
     public void tick() {
         if(getDirectionX()==1){
-           setX(getX()+2);
+           setX(getX()+3);
         }
         else{
-           setX(getX()-2);
+           setX(getX()-3);
         }
         
         if(getDirectionY()==1){
-           setY(getY()+2);       
+           setY(getY()+3);       
         }
         else{
-            setY(getY()-2);
+            setY(getY()-3);
         }
       
         

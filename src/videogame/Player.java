@@ -102,6 +102,10 @@ public class Player extends Item{
     public boolean intersecta(Object obj){
         return obj instanceof Bad && getPerimetro().intersects(((Bad) obj).getPerimetro());     
     }
+    
+    public boolean intersects(Object obj){
+        return obj instanceof Ball && getPerimetro().intersects(((Ball) obj).getPerimetro());     
+    }
 
     @Override
     public void render(Graphics g) {
