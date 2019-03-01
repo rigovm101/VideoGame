@@ -69,4 +69,8 @@ public class Bad extends Item{
             g.drawImage(Assets.bad2, getX(), getY(), getWidth(), getHeight(), null);
         }
     }
+    
+    public boolean intersecta(Object obj){
+        return obj instanceof Ball && getPerimetro().intersects(((Ball) obj).getPerimetro());     
+    }
 }

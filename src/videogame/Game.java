@@ -31,6 +31,7 @@ public class Game implements Runnable {
     private MouseManager mouseManager; // to manage the mouse
     private int score;
     private Ball ball;              //to use ball
+    private boolean pause;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -48,6 +49,7 @@ public class Game implements Runnable {
         mouseManager = new MouseManager();
         bads = new LinkedList<Bad>();
         score = 0;
+        pause = false;
     }
 
     /**
@@ -65,6 +67,14 @@ public class Game implements Runnable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+    
+    public boolean isPause(){
+        return pause;
+    }
+    
+    public void setPause(boolean b){
+        pause = b;
     }
 
     /**
@@ -84,14 +94,12 @@ public class Game implements Runnable {
         Assets.init();
         player = new Player(getWidth() - 100, getHeight()-88, 1, 120, 120, this);
         ball = new Ball(getWidth()/2, getHeight()/2, 10, 10, this);
-        int iNum = (int) (Math.random() * 3 + 10);
+        int iNum = (int) (Math.random() * 3 + 8);
         //adding elements to bads
         for (int i = 1; i <= iNum; i++) {
-            int iPosX = (int) (Math.random() * (-199) - 200);
-            int iPosY = (int) (Math.random() * (341) + 40);
-            int d = (int) (Math.random() * (2) + 1);
-            int s = (int) (Math.random() * (5) + 2);
-            bads.add(new Bad(iPosX, iPosY, 20, 10, this));
+            int iPosX = (int) (Math.random() * (536) + 15);
+            int iPosY = (int) (Math.random() * (206) + 15);
+            bads.add(new Bad(iPosX, iPosY, 60, 20, this));
         }
         display.getJframe().addKeyListener(keyManager);
        /* display.getJframe().addMouseListener(mouseManager);
@@ -141,20 +149,41 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        player.tick();
-        ball.tick();
-        
-        //Collision between player and ball
-        if(player.intersects(ball)){
-            ball.setDirectionY(-1);
-            if(ball.getDirectionX()==1){
-                ball.setDirectionX(-1);              
-            }
-            else
-                ball.setDirectionX(1);           
+        //Pause boolean
+        if(getKeyManager().pause){
+            pause = true;
+        }else{
+            pause = false;
         }
-        
-        //Implementar tick
+        //Enter if the game is unpaused
+        if (!isPause()) {
+            player.tick();
+            ball.tick();
+
+            //Collision between player and ball
+            if (player.intersects(ball)) {
+                ball.setDirectionY(-1);
+                if (ball.getDirectionX() == 1) {
+                    ball.setDirectionX(-1);
+                } else {
+                    ball.setDirectionX(1);
+                }
+            }
+
+            //Collision between ball and bad
+            for (int i = 0; i < bads.size(); i++) {
+                if (bads.get(i).intersecta(ball)) {
+                    bads.get(i).setDamage(bads.get(i).getDamage() + 1);
+                    ball.setDirectionY(ball.getDirectionY() * -1);
+                }
+            }
+
+            for (int i = 0; i < bads.size(); i++) {
+                if (bads.get(i).getDamage() >= 2) {
+                    bads.remove(i);
+                }
+            }
+        }
     }
 
     private void render() {
@@ -171,9 +200,11 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
-            //Activar render jugador y malos
             player.render(g);
             ball.render(g);
+            for(int i = 0; i < bads.size(); i++){
+                bads.get(i).render(g);
+            }
             bs.show();
             g.dispose();
 
@@ -204,5 +235,4 @@ public class Game implements Runnable {
             }
         }
     }
-
 }
