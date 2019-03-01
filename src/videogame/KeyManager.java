@@ -16,11 +16,13 @@ public class KeyManager implements KeyListener {
     
     public boolean left;    // flag to move left the player
     public boolean right;   // flag to move right the player
+    public boolean pause;
 
     private boolean keys[];  // to store all the flags for every key
     
     public KeyManager() {
         keys = new boolean[256];
+        keys[KeyEvent.VK_P] = false;
     }
     
     @Override
@@ -30,13 +32,24 @@ public class KeyManager implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // set true to every key pressed
-        keys[e.getKeyCode()] = true;
+        if(e.getKeyCode() == KeyEvent.VK_P){
+            if(keys[KeyEvent.VK_P]){
+                keys[KeyEvent.VK_P] = false;
+            }else{
+                keys[KeyEvent.VK_P] = true;
+            }
+        }else{
+            keys[e.getKeyCode()] = true;
+        }
+        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         // set false to every key released
-        keys[e.getKeyCode()] = false;
+        if(e.getKeyCode() != KeyEvent.VK_P){
+            keys[e.getKeyCode()] = false;
+        }
     }
     
     /**
@@ -45,6 +58,7 @@ public class KeyManager implements KeyListener {
     public void tick() {
         left = keys[KeyEvent.VK_LEFT];
         right = keys[KeyEvent.VK_RIGHT];
+        pause = keys[KeyEvent.VK_P];
 
     }
 }
