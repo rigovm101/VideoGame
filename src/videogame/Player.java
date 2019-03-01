@@ -100,8 +100,7 @@ public class Player extends Item{
     }
     
     public boolean intersecta(Object obj){
-        return obj instanceof Bad && getPerimetro().intersects(((Bad) obj).getPerimetro());
-        
+        return obj instanceof Bad && getPerimetro().intersects(((Bad) obj).getPerimetro());     
     }
 
     @Override

@@ -17,6 +17,8 @@ public class Assets {
     public static BufferedImage bad;
     public static BufferedImage bad2;
     public static BufferedImage bad3;
+    public static BufferedImage bullet;
+    
 
     /**
      * initializing the images of the game
@@ -27,6 +29,7 @@ public class Assets {
         bad2 = ImageLoader.loadImage("/images/Meth2.png");
         bad3 = ImageLoader.loadImage("/images/Meth3.png");
         player = ImageLoader.loadImage("/images/RV.png");
+        bullet = ImageLoader.loadImage("/images/bullet.png");
     }
     
 }
