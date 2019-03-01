@@ -28,7 +28,7 @@ public class Assets {
         bad = ImageLoader.loadImage("/images/Meth1.png");
         bad2 = ImageLoader.loadImage("/images/Meth2.png");
         bad3 = ImageLoader.loadImage("/images/Meth3.png");
-        player = ImageLoader.loadImage("/images/RV.png");
+        player = ImageLoader.loadImage("/images/RV2.png");
         bullet = ImageLoader.loadImage("/images/bullet.png");
     }
     

@@ -144,6 +144,16 @@ public class Game implements Runnable {
         player.tick();
         ball.tick();
         
+        //Collision between player and ball
+        if(player.intersects(ball)){
+            ball.setDirectionY(-1);
+            if(ball.getDirectionX()==1){
+                ball.setDirectionX(-1);              
+            }
+            else
+                ball.setDirectionX(1);           
+        }
+        
         //Implementar tick
     }
 
