@@ -30,6 +30,7 @@ public class Game implements Runnable {
     private KeyManager keyManager;  // to manage the keyboard
     private MouseManager mouseManager; // to manage the mouse
     private int score;
+    private Ball ball;              //to use ball
 
     /**
      * to create title, width and height and set the game is still not running
@@ -82,6 +83,7 @@ public class Game implements Runnable {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
         player = new Player(getWidth() - 100, getHeight()-88, 1, 120, 120, this);
+        ball = new Ball(getWidth()/2, getHeight()/2, 10, 10, this);
         int iNum = (int) (Math.random() * 3 + 10);
         //adding elements to bads
         for (int i = 1; i <= iNum; i++) {
@@ -138,6 +140,10 @@ public class Game implements Runnable {
     }
 
     private void tick() {
+        keyManager.tick();
+        player.tick();
+        ball.tick();
+        
         //Implementar tick
     }
 
@@ -156,6 +162,8 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
             //Activar render jugador y malos
+            player.render(g);
+            ball.render(g);
             bs.show();
             g.dispose();
 
