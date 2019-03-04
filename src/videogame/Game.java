@@ -68,12 +68,12 @@ public class Game implements Runnable {
     public void setScore(int score) {
         this.score = score;
     }
-    
-    public boolean isPause(){
+
+    public boolean isPause() {
         return pause;
     }
-    
-    public void setPause(boolean b){
+
+    public void setPause(boolean b) {
         pause = b;
     }
 
@@ -92,8 +92,8 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        player = new Player(getWidth() - 100, getHeight()-88, 1, 120, 120, this);
-        ball = new Ball(getWidth()/2, getHeight()/2, 10, 10, this);
+        player = new Player(getWidth() - 100, getHeight() - 88, 1, 120, 120, this);
+        ball = new Ball(getWidth() / 2, getHeight() / 2, 10, 10, this);
         int iNum = (int) (Math.random() * 3 + 8);
         //adding elements to bads
         for (int i = 1; i <= iNum; i++) {
@@ -102,7 +102,7 @@ public class Game implements Runnable {
             bads.add(new Bad(iPosX, iPosY, 60, 20, this));
         }
         display.getJframe().addKeyListener(keyManager);
-       /* display.getJframe().addMouseListener(mouseManager);
+        /* display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);*/
@@ -149,38 +149,51 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        //Pause boolean
-        if(getKeyManager().pause){
-            pause = true;
-        }else{
-            pause = false;
-        }
-        //Enter if the game is unpaused
-        if (!isPause()) {
-            player.tick();
-            ball.tick();
 
-            //Collision between player and ball
-            if (player.intersects(ball)) {
-                ball.setDirectionY(-1);
-                if (ball.getDirectionX() == 1) {
-                    ball.setDirectionX(-1);
-                } else {
-                    ball.setDirectionX(1);
+        if (bads.isEmpty()) {
+            if (getKeyManager().space) {
+                int iNum = (int) (Math.random() * 3 + 8);
+                //adding elements to bads
+                for (int i = 1; i <= iNum; i++) {
+                    int iPosX = (int) (Math.random() * (536) + 15);
+                    int iPosY = (int) (Math.random() * (206) + 15);
+                    bads.add(new Bad(iPosX, iPosY, 60, 20, this));
                 }
             }
-
-            //Collision between ball and bad
-            for (int i = 0; i < bads.size(); i++) {
-                if (bads.get(i).intersecta(ball)) {
-                    bads.get(i).setDamage(bads.get(i).getDamage() + 1);
-                    ball.setDirectionY(ball.getDirectionY() * -1);
-                }
+        } else {
+            //Pause boolean
+            if (getKeyManager().pause) {
+                pause = true;
+            } else {
+                pause = false;
             }
+            //Enter if the game is unpaused
+            if (!isPause()) {
+                player.tick();
+                ball.tick();
 
-            for (int i = 0; i < bads.size(); i++) {
-                if (bads.get(i).getDamage() >= 2) {
-                    bads.remove(i);
+                //Collision between player and ball
+                if (player.intersects(ball)) {
+                    ball.setDirectionY(-1);
+                    if (ball.getDirectionX() == 1) {
+                        ball.setDirectionX(-1);
+                    } else {
+                        ball.setDirectionX(1);
+                    }
+                }
+
+                //Collision between ball and bad
+                for (int i = 0; i < bads.size(); i++) {
+                    if (bads.get(i).intersecta(ball)) {
+                        bads.get(i).setDamage(bads.get(i).getDamage() + 1);
+                        ball.setDirectionY(ball.getDirectionY() * -1);
+                    }
+                }
+
+                for (int i = 0; i < bads.size(); i++) {
+                    if (bads.get(i).getDamage() >= 2) {
+                        bads.remove(i);
+                    }
                 }
             }
         }
@@ -200,10 +213,14 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
-            player.render(g);
-            ball.render(g);
-            for(int i = 0; i < bads.size(); i++){
-                bads.get(i).render(g);
+            if (!bads.isEmpty()) {
+                player.render(g);
+                ball.render(g);
+                for (int i = 0; i < bads.size(); i++) {
+                    bads.get(i).render(g);
+                }
+            } else {
+                g.drawImage(Assets.over, 200, 100, 200, 100, null);
             }
             bs.show();
             g.dispose();
