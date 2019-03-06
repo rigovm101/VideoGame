@@ -110,7 +110,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        player = new Player(getWidth() - 100, getHeight() - 88, 1, 120, 120, this);
+        player = new Player(getWidth() - 100, getHeight() - 88, 1, 120, 100, this);
         ball = new Ball(getWidth() / 2, getHeight() / 2, 10, 10, this);
         int iNum = (int) (Math.random() * 3 + 8);
         //adding elements to bads

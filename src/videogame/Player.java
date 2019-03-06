@@ -122,7 +122,7 @@ public class Player extends Item{
      * from the image
      */
     public Rectangle getPerimetro(){
-        return new Rectangle(getX(), getY(), getWidth(), getHeight());
+        return new Rectangle(getX(), getY()+20, getWidth(), getHeight());
     }
     
     /**
