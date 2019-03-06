@@ -111,7 +111,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * initializing the display window of the game
+     * initializing the display window of the game.
      */
     private void init() {
         display = new Display(title, getWidth(), getHeight());
@@ -169,8 +169,7 @@ public class Game implements Runnable {
         return keyManager;
     }
     
-
-
+    
     private void tick() {
         keyManager.tick();
         
@@ -206,7 +205,7 @@ public class Game implements Runnable {
                 //Collision between player and ball
                 if (player.intersects(ball)) {
                     ball.setDirectionY(-1);
-                   // ball.setSpeed(4);
+                   
                     if (ball.getDirectionX() == 1) {
                         if(keyManager.left){
                            ball.setDirectionX(-1); 
@@ -244,6 +243,10 @@ public class Game implements Runnable {
         }
     }
 
+    /**
+     * draws the background, player, ball and bads, if there are no more bads,
+     * stop drawing everything else and draw the game_over image.
+     */
     private void render() {
         // get the buffer strategy from the display
         bs = display.getCanvas().getBufferStrategy();
@@ -273,6 +276,11 @@ public class Game implements Runnable {
         }
     }
     
+    /**
+     * opens a file which contains the coordinates for every object and reads it
+     * to insert the information of each object into the game.
+     * 
+     */
     void load(){
         String fileName = "/loadData/loadData.txt";
         try{
@@ -309,6 +317,12 @@ public class Game implements Runnable {
         }
     }
     
+    
+    /**
+     * creates a file that saves the x and y coordinates for the ball and player
+     * and for every bad, it saves the coordinates and the amount of times it
+     * has been hit. 
+     */
     void save(){
         String fileName = "/loadData/loadData.txt";
         try{
@@ -333,7 +347,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * setting the thread for the game
+     * setting the thread for the game.
      */
     public synchronized void start() {
         if (!running) {
@@ -344,7 +358,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * stopping the thread
+     * stopping the thread.
      */
     public synchronized void stop() {
         if (running) {

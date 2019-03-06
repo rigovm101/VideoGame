@@ -22,7 +22,7 @@ public class Assets {
     
 
     /**
-     * initializes the images of the game
+     * initializes the images of the game.
      */
     public static void init() {
         background = ImageLoader.loadImage("/images/Background.png");

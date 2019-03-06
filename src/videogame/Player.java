@@ -92,7 +92,7 @@ public class Player extends Item{
 
     /**
      * Sets the movement of player and resets position if it collision with
-     * a wall
+     * a wall.
      */
     @Override
     public void tick() {
