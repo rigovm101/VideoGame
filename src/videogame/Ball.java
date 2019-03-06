@@ -111,7 +111,7 @@ public class Ball extends Item {
     
     
     /**
-     * Sets movement of the ball and collision with the walls
+     * Sets movement of the ball and collision with the walls.
      */
     @Override
     public void tick() {
