@@ -24,22 +24,47 @@ public class MouseManager  implements MouseListener, MouseMotionListener {
         derecho = false;
     }
 
+    /**
+     * To get the position of the mouse on the x-axis
+     *
+     * @return an <code>int</code> value with the x position
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * To get the position of the mouse on the t-axis
+     *
+     * @return an <code>int</code> value with the y position
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * To determine if left was pushed
+     *
+     * @return a <code>boolean</code> value 
+     */
     public boolean isIzquierdo() {
         return izquierdo;
     }
 
+    /**
+     * To determine if right was pushed
+     *
+     * @return a <code>boolean</code> value 
+     */
     public boolean isDerecho() {
         return derecho;
     }
 
+    /**
+     * To set if left was pushed
+     *
+     * @param izquierdo boolean  
+     */
     public void setIzquierdo(boolean izquierdo) {
         this.izquierdo = izquierdo;
     }
@@ -52,6 +77,12 @@ public class MouseManager  implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
     }
 
+    /**
+     * if the left button from mouse was release, set true to boolean left and 
+     * get the x and y position of where it was released
+     *
+     * @param e button used
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
@@ -69,6 +100,12 @@ public class MouseManager  implements MouseListener, MouseMotionListener {
     public void mouseExited(MouseEvent e) {
     }
 
+    /**
+     * if the left button from mouse was used in a drag motion, set true to
+     * boolean left and get the x and y position of the mouse
+     *
+     * @param e button used
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {

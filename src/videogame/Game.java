@@ -61,18 +61,38 @@ public class Game implements Runnable {
         return width;
     }
 
+    /**
+     * To get the score of the game 
+     *
+     * @return an <code>int</code> value with the score
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * To set the score of the game 
+     *
+     * @param score 
+     */
     public void setScore(int score) {
         this.score = score;
     }
 
+    /**
+     * To determine if the game is paused
+     *
+     * @param score 
+     */
     public boolean isPause() {
         return pause;
     }
 
+    /**
+     * To pause the game
+     *
+     * @param score 
+     */
     public void setPause(boolean b) {
         pause = b;
     }
@@ -139,10 +159,20 @@ public class Game implements Runnable {
         stop();
     }
 
+    /**
+     * To get access to the KeyMaanger class 
+     *
+     * @return a <code>keyManager</code> value
+     */
     public KeyManager getKeyManager() {
         return keyManager;
     }
-
+    
+    /**
+     * To get access to the MouseMaanger class 
+     *
+     * @return a <code>mouseManager</code> value
+     */
     public MouseManager getMouseManager() {
         return mouseManager;
     }
@@ -190,6 +220,7 @@ public class Game implements Runnable {
                     }
                 }
 
+                //Remove bad if its hit more than once
                 for (int i = 0; i < bads.size(); i++) {
                     if (bads.get(i).getDamage() >= 2) {
                         bads.remove(i);
@@ -229,7 +260,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * setting the thead for the game
+     * setting the thread for the game
      */
     public synchronized void start() {
         if (!running) {
