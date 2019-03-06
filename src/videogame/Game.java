@@ -9,6 +9,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -117,7 +123,7 @@ public class Game implements Runnable {
         for (int i = 1; i <= iNum; i++) {
             int iPosX = (int) (Math.random() * (536) + 15);
             int iPosY = (int) (Math.random() * (206) + 15);
-            bads.add(new Bad(iPosX, iPosY, 60, 20, this));
+            bads.add(new Bad(iPosX, iPosY, 60, 20, 0, this));
         }
         display.getJframe().addKeyListener(keyManager);
 
@@ -167,6 +173,13 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
+        
+        if(getKeyManager().load){
+            load();
+        }
+        if(getKeyManager().save){
+            save();
+        }
 
         if (bads.isEmpty()) {
             if (getKeyManager().space) {
@@ -175,7 +188,7 @@ public class Game implements Runnable {
                 for (int i = 1; i <= iNum; i++) {
                     int iPosX = (int) (Math.random() * (536) + 15);
                     int iPosY = (int) (Math.random() * (206) + 15);
-                    bads.add(new Bad(iPosX, iPosY, 60, 20, this));
+                    bads.add(new Bad(iPosX, iPosY, 60, 20, 0, this));
                 }
             }
         } else {
@@ -257,6 +270,65 @@ public class Game implements Runnable {
             bs.show();
             g.dispose();
 
+        }
+    }
+    
+    void load(){
+        String fileName = "/loadData/loadData.txt";
+        try{
+            FileReader fileReader = new FileReader("loadData.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            //Ball Position
+            int ballX, ballY;
+            ballX = bufferedReader.read();
+            ballY = bufferedReader.read();
+            ball.setX(ballX);
+            ball.setY(ballY);
+            //Ball direction
+            int ballDX, ballDY;
+            ballDX = bufferedReader.read();
+            ballDY = bufferedReader.read();
+            ball.setDirectionX(ballDX);
+            ball.setDirectionY(ballDY);
+            //Bad Amount
+            int badAmount;
+            badAmount = bufferedReader.read();
+            bads.clear();
+            int badPosX, badPosY, badDamage;
+            for(int i = 0; i < badAmount; i++){
+                badPosX = bufferedReader.read();
+                badPosY = bufferedReader.read();
+                badDamage = bufferedReader.read();
+                bads.add(new Bad(badPosX, badPosY, 60, 20, badDamage,this));
+            }
+            bufferedReader.close();
+        }catch(FileNotFoundException ex){
+            System.out.println("Unable to open file '" + fileName + "'");
+        }catch(IOException ex){
+            
+        }
+    }
+    
+    void save(){
+        String fileName = "/loadData/loadData.txt";
+        try{
+            FileWriter fileWriter = new FileWriter("loadData.txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(ball.getX());
+            bufferedWriter.write(ball.getY());
+            bufferedWriter.write(ball.getDirectionX());
+            bufferedWriter.write(ball.getDirectionY());
+            bufferedWriter.write(bads.size());
+            for(int i = 0; i < bads.size(); i++){
+                bufferedWriter.write(bads.get(i).getX());
+                bufferedWriter.write(bads.get(i).getY());
+                bufferedWriter.write(bads.get(i).getDamage());
+            }
+            bufferedWriter.close();
+        }catch(FileNotFoundException ex){
+            System.out.println("Unable to open file '" + fileName + "'");
+        }catch(IOException ex){
+            
         }
     }
 

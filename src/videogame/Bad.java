@@ -27,12 +27,12 @@ public class Bad extends Item{
      * @param height to set the height
      * @param damage to set how many times Bad has been hit
      */
-    public Bad(int x, int y, int width, int height, Game game) {
+    public Bad(int x, int y, int width, int height, int damage, Game game) {
         super(x, y);
         this.width = width;
         this.height = height;
         this.game = game;
-        this.damage = 0;
+        this.damage = damage;
     }
 
     /**
