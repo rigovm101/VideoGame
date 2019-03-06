@@ -133,13 +133,18 @@ public class Ball extends Item {
         }
         
         //collsion with the walls from the upper and botoom side
-        if(getY()>=game.getHeight()-10 || getY()<=0){
+        if(getY()<=0){
             if(getDirectionY()==1){
                 setDirectionY(-1);           
             }
             else{
                 setDirectionY(1);
             }          
+        }
+        if(getY()>=game.getHeight()-10){
+            setX(game.getHeight()/2);
+            setY(game.getWidth()/2);
+            //setDirectionY()
         }
         
         
