@@ -28,7 +28,6 @@ public class Game implements Runnable {
     private Player player;          // to use a player
     private LinkedList<Bad> bads;   // to use a bad guys
     private KeyManager keyManager;  // to manage the keyboard
-    private MouseManager mouseManager; // to manage the mouse
     private int score;
     private Ball ball;              //to use ball
     private boolean pause;
@@ -46,7 +45,6 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-        mouseManager = new MouseManager();
         bads = new LinkedList<Bad>();
         score = 0;
         pause = false;
@@ -122,10 +120,7 @@ public class Game implements Runnable {
             bads.add(new Bad(iPosX, iPosY, 60, 20, this));
         }
         display.getJframe().addKeyListener(keyManager);
-        /* display.getJframe().addMouseListener(mouseManager);
-        display.getJframe().addMouseMotionListener(mouseManager);
-        display.getCanvas().addMouseListener(mouseManager);
-        display.getCanvas().addMouseMotionListener(mouseManager);*/
+
     }
 
     @Override
@@ -168,14 +163,7 @@ public class Game implements Runnable {
         return keyManager;
     }
     
-    /**
-     * To get access to the MouseMaanger class 
-     *
-     * @return a <code>mouseManager</code> value
-     */
-    public MouseManager getMouseManager() {
-        return mouseManager;
-    }
+
 
     private void tick() {
         keyManager.tick();
@@ -206,9 +194,21 @@ public class Game implements Runnable {
                 if (player.intersects(ball)) {
                     ball.setDirectionY(-1);
                     if (ball.getDirectionX() == 1) {
-                        ball.setDirectionX(-1);
-                    } else {
-                        ball.setDirectionX(1);
+                        if(keyManager.left){
+                           ball.setDirectionX(-1); 
+                        }
+                        else{
+                           ball.setDirectionX(1); 
+                        }       
+                        
+                    } else if(ball.getDirectionX() == -1){
+                        if(keyManager.right){
+                           ball.setDirectionX(1); 
+                        }
+                        else{
+                           ball.setDirectionX(-1);
+                        }
+                        
                     }
                 }
 
