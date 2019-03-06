@@ -193,6 +193,7 @@ public class Game implements Runnable {
                 //Collision between player and ball
                 if (player.intersects(ball)) {
                     ball.setDirectionY(-1);
+                   // ball.setSpeed(4);
                     if (ball.getDirectionX() == 1) {
                         if(keyManager.left){
                            ball.setDirectionX(-1); 

@@ -18,6 +18,7 @@ public class Ball extends Item {
     private int directionX;
     private int directionY;
     private Game game;
+    private int speed;
     
     /**
      * initializes the values for the ball
@@ -32,8 +33,9 @@ public class Ball extends Item {
         this.width = width;
         this.height = height;
         this.game = game;
-        this.directionX = directionX;
-        this.directionY = directionY;
+        directionX = 1;
+        directionY = 1;
+        //speed = 3;
     }
 
     /**
@@ -89,6 +91,12 @@ public class Ball extends Item {
     public void setDirectionY(int directionY) {
         this.directionY = directionY;
     }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+    
+    
     
     /**
      * creates a new rectangle that covers the ball, using the x and y position
@@ -108,10 +116,10 @@ public class Ball extends Item {
     @Override
     public void tick() {
         if(getDirectionX()==1){
-           setX(getX()+3);
+           setX(getX()+4);
         }
         else{
-           setX(getX()-3);
+           setX(getX()-4);
         }
         
         if(getDirectionY()==1){
@@ -123,17 +131,19 @@ public class Ball extends Item {
       
         
         //collision with the walls from the left and rights side
-        if(getX()>= game.getWidth()-10 || getX()<=0){
-            if(getDirectionX()==1){
+        if(getX()>= game.getWidth()-10){
+            //speed = 3;
+            if(getDirectionX()==1)
                 setDirectionX(-1);           
-            }
-            else{
-                setDirectionX(1);
-            }            
+                    
+        }
+        if(getX()<=0){
+            setDirectionX(1);
         }
         
         //collsion with the walls from the upper and botoom side
         if(getY()<=0){
+            //speed=3;
             if(getDirectionY()==1){
                 setDirectionY(-1);           
             }
