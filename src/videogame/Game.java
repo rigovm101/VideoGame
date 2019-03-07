@@ -5,8 +5,6 @@
  */
 package videogame;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.BufferedReader;
@@ -230,6 +228,9 @@ public class Game implements Runnable {
                     if (bads.get(i).intersecta(ball)) {
                         bads.get(i).setDamage(bads.get(i).getDamage() + 1);
                         ball.setDirectionY(ball.getDirectionY() * -1);
+                        if(bads.get(i).getX()-ball.getX() > 0){
+                            ball.setDirectionY(ball.getDirectionX() * -1);
+                        }
                     }
                 }
 
@@ -282,7 +283,6 @@ public class Game implements Runnable {
      * 
      */
     void load(){
-        String fileName = "/loadData/loadData.txt";
         try{
             FileReader fileReader = new FileReader("loadData.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -311,7 +311,7 @@ public class Game implements Runnable {
             }
             bufferedReader.close();
         }catch(FileNotFoundException ex){
-            System.out.println("Unable to open file '" + fileName + "'");
+            System.out.println("Unable to open file ");
         }catch(IOException ex){
             
         }
@@ -324,7 +324,6 @@ public class Game implements Runnable {
      * has been hit. 
      */
     void save(){
-        String fileName = "/loadData/loadData.txt";
         try{
             FileWriter fileWriter = new FileWriter("loadData.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -340,7 +339,7 @@ public class Game implements Runnable {
             }
             bufferedWriter.close();
         }catch(FileNotFoundException ex){
-            System.out.println("Unable to open file '" + fileName + "'");
+            System.out.println("Unable to open file ");
         }catch(IOException ex){
             
         }
